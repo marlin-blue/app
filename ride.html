@@ -18,8 +18,19 @@
             $('#numberInputForm').submit(function(event) {
                 event.preventDefault();
                 var number = $('#number').val();
-                // Perform further processing or API calls here
-                console.log("Number input:", number);
+                
+                // Make an API call to your Lambda function
+                $.ajax({
+                    url: 'https://bo9fv09n70.execute-api.ap-southeast-1.amazonaws.com/prod/numberinput',
+                    method: 'POST',
+                    data: { number: number },
+                    success: function(response) {
+                        console.log("Number input stored successfully:", response);
+                    },
+                    error: function(error) {
+                        console.error("Error storing number input:", error);
+                    }
+                });
             });
         });
     </script>
